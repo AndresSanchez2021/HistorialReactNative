@@ -1,6 +1,6 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Historial } from '../screens/Historial';
+import Historial  from '../screens/Historial';
 import { TopTapServicios } from '../screens/TopTapServicios';
 import { StackNavigator } from './StackNavigator';
 

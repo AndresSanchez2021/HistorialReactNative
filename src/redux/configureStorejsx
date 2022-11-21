@@ -1,0 +1,39 @@
+import { createStore } from 'redux'
+import { ADD_TO_HISTORIAL, HISTORIAL_FAILED, HISTORIAL_LOADING} from './actionTypes'
+
+
+const initialStore = {
+    historial:{
+        isLoading:true,
+        errMess:null,
+        historial:[]
+    },
+    
+}
+
+
+const rootReducer=(state = initialStore, action) =>{
+
+    switch (action.type) {
+        case ADD_TO_HISTORIAL:
+            return{...state
+                ,isLoading:false, errMess:null, dishes:action.payload }
+            
+            
+        case HISTORIAL_LOADING:
+            return{
+                ...state,
+                return{...state, isLoading:true, errMess:null, historial:[] }
+            }
+        case HISTORIAL_FAILED:
+            return{
+                ...state,
+                isLoading:false, errMess:action.payload, dishes:[] }
+           
+        default:
+            return state;
+        }
+    
+
+}
+export default createStore(rootReducer)

@@ -1,14 +1,16 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Button, ScrollView, Text, View } from 'react-native';
 import { styles } from '../theme/appTheme';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { CardPedido } from '../components/CardPedido';
+import { fetchHistoria, getHistoria } from '../redux/ActionCreators';
 
 interface Props extends StackScreenProps<any,any>{};
 
-export const Historial = () => {
+ const Historial = ({Historias, getHistorias}) => {
 
   const ejemplo={
     id:"54145154",
@@ -42,7 +44,12 @@ export const Historial = () => {
     total:"59000",
   }
   
+  useEffect(() => {
+    getHistorias()
+  }, [])
   
+  //
+  console.log(' historia:',Historias );
   
   return (
     <ScrollView>
@@ -58,3 +65,21 @@ export const Historial = () => {
     </ScrollView>
   )
 }
+
+const mapStateToProps= state =>(
+  // me va a mapear el estado global y se lo pasa al 
+  //componente CartCounter por medio de props
+  {
+    Historias:state.historial
+  }
+)
+
+const mapDispatchToProps=(dispatch)=>{
+  getHistorias(){
+    dispatch(fetchHistoria());    
+  }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Historial);
